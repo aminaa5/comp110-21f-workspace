@@ -2,8 +2,6 @@
 
 __author__ = "730398576"
 
-# Define your functions below
-
 
 def only_evens(x: list[int]) -> list[int]:
     """Return only even numbers from list of numbers."""
