@@ -10,6 +10,8 @@ def all(numbers: list[int], digit: int) -> bool:
     """Return True is all numbers in list equal the integer."""
     i: int = 0
     while i < len(numbers):
+        if numbers == 0:
+            return False
         if numbers[i] == digit:
             i += 1 
         else:
@@ -21,6 +23,8 @@ def is_equal(first: list[int], second: list[int]) -> bool:
     """Return True if every element at every index is equal in both lists."""
     i: int = 0
     while i < len(first) and i < len(second):
+        if len(first) != len(second):
+            return False
         if first[i] == second[i]:
             i += 1 
         else:
@@ -41,10 +45,3 @@ def max(input: list[int]) -> int:
         else:
             i += 1
     return max
-
-
-print(all([1, 1, 1], 1))
-print(all([1, 4, 3], 4))
-print(is_equal([4, 4, 4], [4, 4, 4]))
-print(is_equal([2, 5, 4], [3, 4, 1]))
-print(max([3, 4, 9]))
