@@ -1,4 +1,4 @@
-"""This exercise prints out demmostrations of relational operators."""
+"""This exercise prints out demonstrations of relational operators."""
 
 __author__ = "730398576"
 

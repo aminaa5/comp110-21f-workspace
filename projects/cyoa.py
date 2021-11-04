@@ -13,6 +13,7 @@ emoji: str = '\U0001F970'
 
 
 def main() -> None:
+    """MAIN!"""
     greet()
     question_1()
     question_2()
@@ -21,6 +22,7 @@ def main() -> None:
 
 
 def greet() -> None:
+    """Greet the player, be nice!!"""
     global player
     player = str(input("What is your name? "))
     print("Welcome to the quiz where you find out the zodiac sign of your soulmate!!")
@@ -28,6 +30,7 @@ def greet() -> None:
 
 
 def question_1() -> None:
+    """The very first question of the quiz."""
     global player
     global points
     global q1
@@ -44,7 +47,8 @@ def question_1() -> None:
     print(F"{player}, you're doing great!!'")
     
     
-def question_2() -> None:     
+def question_2() -> None:   
+    """Second question of the quiz!"""  
     global player
     global points
     global q2
@@ -62,6 +66,7 @@ def question_2() -> None:
     
     
 def question_3() -> None: 
+    """Third and last question of the quiz!"""
     global player
     global points    
     global q3
@@ -79,6 +84,7 @@ def question_3() -> None:
 
 
 def score() -> None:
+    """The score determines your soulmates zodiac sign!"""
     global points
     global emoji
     if points <= 4:

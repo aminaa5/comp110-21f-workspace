@@ -14,17 +14,21 @@ from random import randint
 
 # Begin your solution here...
 print("Your fortune cookie says...")
-a = str("You will find true love in two days! <3")
-b = str("Take a break and watch good energy enter your life! :)")
-c = str("Someone with purple hair will enter your life!! :P")
-x = int(a)
-y = int(b)
-z = int(c)
-if x == 1:
+a: str = ("You will find true love in two days! <3")
+b: str = ("Take a break and watch good energy enter your life! :)")
+c: str = ("Someone with purple hair will enter your life!! :P")
+d: str = ("Tomorrow will bring something special!")
+random: int = randint(1, 4)
+if random == 1:
     print(a)
-    if y == 2:
+else:
+    if random == 2:
         print(b)
-        if z == 3:
+    else:
+        if random == 3:
             print(c)
-randint(1, 3)
+        else:
+            if random == 4:
+                print(d)
+
 print("Now, go spread positive vibes!")
