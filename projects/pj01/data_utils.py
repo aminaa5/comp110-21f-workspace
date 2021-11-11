@@ -1,4 +1,4 @@
-"""Analysis funtions."""
+"""Data analysis funtions."""
 
 __author__ = "730398576"
 
@@ -6,10 +6,10 @@ __author__ = "730398576"
 from csv import DictReader
 
 
-def read_csv_rows(DATA_FILE_PATH: str) -> list[dict[str, str]]:
+def read_csv_rows(filename: str) -> list[dict[str, str]]:
     """Reading the rows of a csv file into a 'table'."""
     data_rows: list[dict[str, str]] = []
-    file_handle = open(DATA_FILE_PATH, "r", encoding="utf8")
+    file_handle = open(filename, "r", encoding="utf8")
     csv_reader = DictReader(file_handle)
     for row in csv_reader:
         data_rows.append(row)
@@ -19,19 +19,19 @@ def read_csv_rows(DATA_FILE_PATH: str) -> list[dict[str, str]]:
 
 def column_values(data_rows: list[dict[str, str]], column: str) -> list[str]:
     """List of strings in a column is produced!"""
-    subject_age: list[str] = []
+    comp_major: list[str] = []
     for row in data_rows:
         item: str = row[column]
-        subject_age.append(item)
-    return subject_age
+        comp_major.append(item)
+    return comp_major
 
 
 def columnar(data_cols: list[dict[str, str]]) -> dict[str, list[str]]:
     """Transform from rows to columns!"""
     result: dict[str, list[str]] = {}
-    data_rows: dict[str, str] = data_cols[0]
-    for column in data_rows:
-        result[column] = column_values(data_cols, column)
+    for dicty in data_cols:
+        for keys in dicty:
+            result[keys] = column_values(data_cols, keys)
     return result
 
 
@@ -39,7 +39,12 @@ def head(data_cols_head: dict[str, list[str]], x: int) -> dict[str, list[str]]:
     """Produce a new column-based table with only first rows of data."""
     data_cols: dict[str, list[str]] = {}
     for key in data_cols_head:
-        data_cols[key] = data_cols_head[key][:x]
+        rows: list[str] = []
+        for y in range(x):
+            rows.append(data_cols_head[key][y])
+            if x >= len(data_cols_head):
+                return data_cols_head
+        data_cols[key] = rows
     return data_cols
 
 
@@ -51,18 +56,6 @@ def select(data_cols: dict[str, list[str]], data: list[str]) -> dict[str, list[s
     return selected_data
 
 
-def concat(data_cols_head: dict[str, list[str]], additional_table: dict[str, list[str]]) -> dict[str, list[str]]:
-    """Produce a new column-based table with two column-based tables combined."""
-    combined: dict[str, list[str]] = {}
-    for column in data_cols_head:
-        combined[column] = data_cols_head[column]
-    for column in additional_table:
-        combined[column] = additional_table[column]
-        if data_cols_head[column] == additional_table[column]:
-            combined[column] = additional_table[column]
-    return combined
-
-
 def count(selected_data: list[str]) -> dict[str, int]:
     """Function will count the number of times a value appears!"""
     counts: dict[str, int] = {}
@@ -72,3 +65,16 @@ def count(selected_data: list[str]) -> dict[str, int]:
         else: 
             counts[item] = 1
     return counts
+
+
+def helper(data_cols: dict[str, list[str]], cs: str) -> dict[str, int]:
+    """Return only comp sci majors, BA or BS, and their number of office hour visits."""
+    comp_only: dict[str, int] = {"Yes - BS": 0, "Yes - BA": 0}
+    i: int = 0
+    while i < len(data_cols[cs]):
+        if data_cols[cs][i] == "Yes - BS": 
+            comp_only["Yes - BS"] += int(data_cols["oh_visits"][i])
+        elif data_cols[cs][i] == "Yes - BA":
+            comp_only["Yes - BA"] += int(data_cols["oh_visits"][i])
+        i += 1
+    return comp_only
